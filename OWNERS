@@ -1,2 +1,1 @@
 include platform/system/core:main:/janitors/OWNERS
-include platform/system/core:/janitors/OWNERS #{LAST_RESORT_SUGGESTION}
