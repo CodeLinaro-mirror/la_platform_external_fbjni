@@ -36,6 +36,12 @@ public class HybridData {
 
   private final Destructor mDestructor = new Destructor(this);
 
+  public HybridData() {}
+
+  HybridData(long nativePointer) {
+    mDestructor.mNativePointer = nativePointer;
+  }
+
   /**
    * To explicitly delete the instance, call resetNative(). If the C++ instance is referenced after
    * this is called, a NullPointerException will be thrown. resetNative() may be called multiple

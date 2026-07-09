@@ -25,6 +25,10 @@ local_ref<HybridData> HybridData::create() {
   return newInstance();
 }
 
+local_ref<HybridData> HybridData::create(BaseHybridClass* ptr) {
+  return newInstance(reinterpret_cast<jlong>(ptr));
+}
+
 } // namespace detail
 
 namespace {

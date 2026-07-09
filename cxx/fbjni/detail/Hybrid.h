@@ -36,6 +36,7 @@ class BaseHybridClass {
 struct HybridData : public JavaClass<HybridData> {
   constexpr static auto kJavaDescriptor = "Lcom/facebook/jni/HybridData;";
   static local_ref<HybridData> create();
+  static local_ref<HybridData> create(BaseHybridClass* ptr);
 };
 
 class HybridDestructor : public JavaClass<HybridDestructor> {
@@ -217,6 +218,13 @@ class HybridClass : public detail::HybridTraits<Base>::CxxBase {
       std::unique_ptr<T> cxxPart) {
     auto hybridData = detail::HybridData::create();
     setNativePointer(hybridData, std::move(cxxPart));
+    return hybridData;
+  }
+
+  static local_ref<detail::HybridData> makeHybridDataWithPeer(
+      std::unique_ptr<T> cxxPart) {
+    auto hybridData = detail::HybridData::create(cxxPart.get());
+    cxxPart.release();
     return hybridData;
   }
 
